@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "testBinarySearch",
+      "setup": "",
+      "run": "./gradlew clean test --tests MyTests.testBinarySearch",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "testCalculateSize",
+      "setup": "",
+      "run": "./gradlew clean test --tests MyTests.testCalculateSize",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "testCopy",
+      "setup": "",
+      "run": "./gradlew clean test --tests MyTests.testCopy",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "testMerge",
+      "setup": "",
+      "run": "./gradlew clean test --tests MyTests.testMerge",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    }
+  ]
+}
