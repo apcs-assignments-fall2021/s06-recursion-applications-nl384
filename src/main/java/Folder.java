@@ -41,8 +41,15 @@ public class Folder implements FileItem {
     // file1 which is size 200, file2 which is size 300, and file3 which is size 150.
     // Then, the size of folder1 = 512 + 128*3 + 200 + 300 + 150 = 1546.
     public int calculateSize() {
-        // YOUR CODE HERE
-        return -1;
+        int size = 512;
+        size += items.size() * 128;
+
+        for (int i = 0; i < items.size(); i++) {
+            FileItem item = items.get(i);
+            size += item.calculateSize();
+        }
+
+        return size;
     }
 
     // Creates a copy of the current FileItem
@@ -55,13 +62,44 @@ public class Folder implements FileItem {
     // copy() method should be called on all FileItems in the folder, such
     // that the contents of the folder is copied as well.
     public FileItem copy() {
-        // YOUR CODE HERE
-        return null;
+        Folder folderCopy = new Folder(this.folderName + "_copy");
+
+        for (int i = 0; i < items.size(); i++) {
+//            folderCopy.items.add(items.get(i).copy());
+            FileItem item = items.get(i);
+            folderCopy.addToFolder(item.copy());
+        }
+
+        return folderCopy;
     }
 
     // toString method
     @Override
     public String toString() {
         return this.folderName + ": " + this.items;
+    }
+
+    public static void main(String[] args) {
+        // folder1 contains 3 files
+        Folder folder1 = new Folder("folder1");
+        folder1.addToFolder(new File("file1", 200));
+        folder1.addToFolder(new File("file2", 300));
+        folder1.addToFolder(new File("file3", 150));
+
+        // folder2 contains a file and folder1
+        Folder folder2 = new Folder("folder2");
+        folder2.addToFolder(new File("file4", 200));
+        folder2.addToFolder(folder1);
+
+        // Test getSize() method
+        System.out.println(folder1.calculateSize());
+        // 1546
+        System.out.println(folder2.calculateSize());
+        // 2514
+
+        // Test copy() method
+        FileItem folder3 = folder2.copy();
+        System.out.println(folder3);
+        // folder2_copy: [file4_copy: 200, folder1_copy: [file1_copy: 200, file2_copy: 300, file3_copy: 150]]
     }
 }

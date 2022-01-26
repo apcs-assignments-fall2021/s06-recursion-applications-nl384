@@ -20,7 +20,21 @@ public class MyMain {
     // Tail recursive method:
     public static boolean binarySearchTR(int[] arr, int num, int lowerBound, int upperBound) {
         // YOUR CODE HERE
-        return false;
+//        return false;
+        int middleIndex = lowerBound + (upperBound - lowerBound)/2;
+
+        if (lowerBound > upperBound) {
+            return false;
+        }
+        else if (arr[middleIndex] < num) {
+            return binarySearchTR(arr, num, middleIndex+1, upperBound);
+        }
+        else if (arr[middleIndex] > num) {
+            return binarySearchTR(arr, num, lowerBound, middleIndex-1);
+        }
+        else {
+            return true;
+        }
     }
 
 
@@ -69,6 +83,45 @@ public class MyMain {
 
     public static int[] merge(int[] arr1, int[] arr2) {
         // YOUR CODE HERE
-        return null;
+//        return null;
+
+        // Indices to keep track of location in input and output arrays
+        int idx1 = 0;
+        int idx2 = 0;
+        int outputIdx = 0;
+
+        int[] output = new int[arr1.length + arr2.length];
+
+        // While we have two values left to compare...
+        // * Copy the smaller value into the output array
+        // * Increment the appropriate indexes
+        while (idx1 < arr1.length && idx2 < arr2.length)
+        {
+            if (arr2[idx2] < arr1[idx1]) {
+                output[outputIdx] = arr2[idx2];
+                idx2++;
+            }
+            else {
+                output[outputIdx] = arr1[idx1];
+                idx1++;
+            }
+            outputIdx++;
+        }
+
+        // Copy rest of array A if array arr2 finished first
+        while (idx1 < arr1.length) {
+            output[outputIdx] = arr1[idx1];
+            idx1++;
+            outputIdx++;
+        }
+
+        // Copy rest of array arr2 if array A finished first
+        while (idx2 < arr2.length) {
+            output[outputIdx] = arr2[idx2];
+            idx2++;
+            outputIdx++;
+        }
+
+        return output;
     }
 }
